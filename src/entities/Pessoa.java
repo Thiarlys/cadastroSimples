@@ -1,16 +1,21 @@
 package entities;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Pessoa {
     private Integer id;
     private String nome;
     private Integer idade;
     private String endereco;
+    private LocalDateTime dataModificacao;
 
-    public Pessoa(Integer id, String nome, Integer idade, String endereco) {
+    public Pessoa(Integer id, String nome, Integer idade, String endereco, LocalDateTime data) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.endereco = endereco;
+        this.dataModificacao = data;
     }
 
     public Integer getId() {
@@ -41,8 +46,27 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    public LocalDateTime getDataModificacao() {
+        return dataModificacao;
+    }
+
+    public void editarDados(String novoNome, int novaIdade, String novoEndereco) {
+        this.nome = novoNome;
+        this.idade = novaIdade;
+        this.endereco = novoEndereco;
+        this.dataModificacao = LocalDateTime.now();
+    }
+
     @Override
     public String toString() {
-        return "Id: " + id + ", nome: " + nome + ", idade: " + idade + ", endereço: " + endereco;
+        String nl = System.lineSeparator();
+
+        return  "------------------------" + nl +
+                "Id: " + id + nl +
+                "nome: " + nome + nl +
+                "idade: " + idade +  nl +
+                "endereço: " + endereco +  nl +
+                "ultima modificação: " + dataModificacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
     }
 }
