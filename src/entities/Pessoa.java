@@ -8,14 +8,15 @@ public class Pessoa {
     private String nome;
     private Integer idade;
     private String endereco;
-    private LocalDateTime dataModificacao;
+    private LocalDateTime dataCadasto;
+    private LocalDateTime dataEdicao;
 
     public Pessoa(Integer id, String nome, Integer idade, String endereco, LocalDateTime data) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.endereco = endereco;
-        this.dataModificacao = data;
+        this.dataCadasto = data;
     }
 
     public Integer getId() {
@@ -46,15 +47,18 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
-    public LocalDateTime getDataModificacao() {
-        return dataModificacao;
+    public LocalDateTime getDataCadasto() {
+        return dataCadasto;
     }
 
     public void editarDados(String novoNome, int novaIdade, String novoEndereco) {
         this.nome = novoNome;
         this.idade = novaIdade;
         this.endereco = novoEndereco;
-        this.dataModificacao = LocalDateTime.now();
+        this.dataEdicao = LocalDateTime.now();
+    }
+    public String getInfoEdicao() {
+        return dataEdicao == null ? "Dados originais de cadastro" : "Data da ultima edição: " + dataEdicao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     @Override
@@ -63,10 +67,10 @@ public class Pessoa {
 
         return  "------------------------" + nl +
                 "Id: " + id + nl +
-                "nome: " + nome + nl +
-                "idade: " + idade +  nl +
-                "endereço: " + endereco +  nl +
-                "ultima modificação: " + dataModificacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-
+                "Nome: " + nome + nl +
+                "Idade: " + idade +  nl +
+                "Endereço: " + endereco +  nl +
+                "Data de cadastro: " + dataCadasto.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + nl +
+                getInfoEdicao();
     }
 }
