@@ -5,6 +5,7 @@ Programação Orientada a Objetos (POO).
 
 ## 📌 Funcionalidades
 - Cadastrar usuário
+- Diferenciar cadastro de usuário pessoa física e pesssoa jurídica
 - Listar usuários
 - Editar dados do usuário
 - Excluir usuário
@@ -15,12 +16,14 @@ Programação Orientada a Objetos (POO).
 - Programação Orientada a Objetos (POO)
 - ArrayList
 - LocalDateTime
+- Herança e Polimosfismo
 
 ## 🧠 Conceitos aplicados
 - Encapsulamento
 - Responsabilidade de classes
 - Métodos de domínio
 - Organização de código
+- Classes abstratas
 
 ## ▶️ Como executar
 - Execute a classe `Main`
