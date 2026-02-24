@@ -9,15 +9,31 @@ public class NaturalPerson extends Person{
 
     public NaturalPerson(Integer id, String address, LocalDateTime createdAt, String name, Integer age) {
         super(id, address, createdAt);
+        if (name == null || name.trim().length() < 3) {
+            throw new IllegalArgumentException("Invalid name");
+        }
+
+        if (age <= 0 || age > 120) {
+            throw new IllegalArgumentException("Invalid age");
+        }
         this.name = name;
         this.age = age;
     }
 
     public void update(String newName, Integer newAge, String newAddress) {
+        if (name == null || name.trim().length() < 3) {
+            throw new IllegalArgumentException("Invalid name");
+        }
+
+        if (age <= 0 || age > 120) {
+            throw new IllegalArgumentException("Invalid age");
+        }
         this.name = newName;
         this.age = newAge;
         super.update(newAddress);
     }
+
+
 
     @Override
     public String toString() {

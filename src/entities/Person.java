@@ -32,11 +32,13 @@ public abstract class Person {
         this.updateAt = LocalDateTime.now();
     }
 
+
+
     public String toString() {
         return "ID: " + this.id + "\n" +
                 "Address: " + this.address + "\n" +
-                "Created at" + this.createdAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "\n" +
-                "Update at" + this.updateAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                "Created at: " + this.createdAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "\n" +
+                "Update at: " + this.updateAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 }
 

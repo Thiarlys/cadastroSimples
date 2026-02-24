@@ -7,13 +7,20 @@ public class LegalPerson extends Person{
 
     public LegalPerson(Integer id, String address, LocalDateTime createdAt, String legalName) {
         super(id, address, createdAt);
+        if (legalName == null || legalName.trim().length() < 3) {
+            throw new IllegalArgumentException("Invalid legal name.");
+        }
         this.legalName = legalName;
     }
 
     public void update(String newLegalName, String newAddress) {
+        if (legalName == null || legalName.trim().length() < 3) {
+            throw new IllegalArgumentException("Invalid legal name.");
+        }
         this.legalName = newLegalName;
         super.update(newAddress);
     }
+
 
     @Override
     public String toString() {
