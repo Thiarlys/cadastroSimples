@@ -10,6 +10,9 @@ public abstract class Person {
     protected LocalDateTime createdAt;
     protected LocalDateTime updateAt;
 
+    public Person() {
+    }
+
     public Person(Integer id, String address, LocalDateTime createdAt) {
         this.id = id;
         this.address = address;

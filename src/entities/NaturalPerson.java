@@ -7,32 +7,38 @@ public class NaturalPerson extends Person{
     private String name;
     private Integer age;
 
+    public NaturalPerson() {
+    }
+
     public NaturalPerson(Integer id, String address, LocalDateTime createdAt, String name, Integer age) {
         super(id, address, createdAt);
-        if (name == null || name.trim().length() < 3) {
-            throw new IllegalArgumentException("Invalid name");
-        }
-
-        if (age <= 0 || age > 120) {
-            throw new IllegalArgumentException("Invalid age");
-        }
+        validateName(name);
+        validateAge(age);
         this.name = name;
         this.age = age;
     }
 
     public void update(String newName, Integer newAge, String newAddress) {
-        if (name == null || name.trim().length() < 3) {
-            throw new IllegalArgumentException("Invalid name");
-        }
-
-        if (age <= 0 || age > 120) {
-            throw new IllegalArgumentException("Invalid age");
-        }
+        validateName(newName);
+        validateAge(newAge);
         this.name = newName;
         this.age = newAge;
         super.update(newAddress);
     }
 
+    public void validateName(String name) {
+        if ((name == null) || !name.matches("[a-zA-ZÀ-ÿ ]+")) {
+            System.out.println("------------------");
+            throw new IllegalArgumentException("Invalid name");
+        }
+    }
+
+    public void validateAge(int age) {
+        if (age <= 0 || age > 120) {
+            System.out.println("------------------");
+            throw new IllegalArgumentException("Invalid age");
+        }
+    }
 
 
     @Override

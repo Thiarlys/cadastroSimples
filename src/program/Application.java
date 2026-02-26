@@ -5,10 +5,7 @@ import entities.NaturalPerson;
 import entities.Person;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Application {
     public static void main(String[] args) {
@@ -32,99 +29,159 @@ public class Application {
 
             switch (option) {
                 case 1:
+                    NaturalPerson naturalPersonTest = new NaturalPerson();
+                    int idNaturalPerson;
+                    String name;
+                    int age;
                     while (true) {
                         try {
                             System.out.println("Enter your id: ");
                             String idInput = sc.nextLine();
-                            int id = Integer.parseInt(idInput);
-                            if (idExists(people,id)) {
+                            idNaturalPerson = Integer.parseInt(idInput);
+                            if (idExists(people, idNaturalPerson)) {
                                 System.out.println("ID alredy exist.");
-                                continue;
+                            } else {
+                                break;
                             }
-                            System.out.println("Enter your name: ");
-                            String name = sc.nextLine();
-
-                            System.out.println("Enter your age: ");
-                            String ageInput = sc.nextLine();
-                            int age = Integer.parseInt(ageInput);
-
-                            System.out.println("Enter your address: ");
-                            String address = sc.nextLine();
-
-                            LocalDateTime createdAt = LocalDateTime.now();
-                            people.add(new NaturalPerson(id, address, createdAt, name, age));
+                        }
+                        catch (NumberFormatException e) {
+                            System.out.println("Invalid id. Please enter a number.");
+                        }
+                    }
+                    while (true) {
+                        System.out.println("Enter your name: ");
+                        name = sc.nextLine();
+                        try {
+                            naturalPersonTest.validateName(name);
                             break;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid ID. It must be a numeric value.");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    while (true) {
+                        System.out.println("Enter your age: ");
+                        String ageInput = sc.nextLine();
+                        try {
+                            age = Integer.parseInt(ageInput);
+                            naturalPersonTest.validateAge(age);
+                            break;
+                        }catch (NumberFormatException e) {
+                            System.out.println("Age must be a number. Try again.");
                         }
                         catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                         }
                     }
+                    System.out.println("Enter your address: ");
+                    String addressNaturalPerson = sc.nextLine();
+
+                    LocalDateTime createdAtNaturalPerson = LocalDateTime.now();
+                    people.add(new NaturalPerson(idNaturalPerson, addressNaturalPerson, createdAtNaturalPerson, name, age));
                     break;
                 case 2:
+                    LegalPerson legalPersonTest = new LegalPerson();
+                    int idLegalPerson;
+                    String legalName;
                     while (true) {
                         try {
                             System.out.println("Enter your id: ");
                             String idInput = sc.nextLine();
-                            int id = Integer.parseInt(idInput);
-                            if (idExists(people,id)) {
+                            idLegalPerson = Integer.parseInt(idInput);
+                            if (idExists(people, idLegalPerson)) {
                                 System.out.println("ID alredy exist.");
-                                continue;
+                            } else {
+                                break;
                             }
-                            System.out.println("Enter your legal name: ");
-                            String legalName = sc.nextLine();
-
-                            System.out.println("Enter your address: ");
-                            String address = sc.nextLine();
-
-                            LocalDateTime createdAt = LocalDateTime.now();
-                            people.add(new LegalPerson(id, address, createdAt, legalName));
-                            break;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid ID. It must be a numeric value.");
+                        }catch (NumberFormatException e) {
+                            System.out.println("Invalid id. Please enter a number.");
                         }
-                        catch (IllegalArgumentException e) {
+                    }
+                    while (true) {
+                        System.out.println("Enter your legal name: ");
+                        legalName = sc.nextLine();
+                        try {
+                            legalPersonTest.validateLegalName(legalName);
+                            break;
+                        } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                         }
                     }
+                    System.out.println("Enter your address: ");
+                    String addressLegalPerson = sc.nextLine();
+
+                    LocalDateTime createdAtLegalPerson = LocalDateTime.now();
+                    people.add(new LegalPerson(idLegalPerson, addressLegalPerson, createdAtLegalPerson, legalName));
                     break;
                 case 3:
-                    boolean updated = false;
-
-                    System.out.println("Enter the id to search: ");
-                    String idUpdateInput = sc.nextLine();
-                    int idUpdate = Integer.parseInt(idUpdateInput);
-                    for (int i = 0; i < people.size(); i++) {
-                        Integer idPerson = people.get(i).getId();
-                        if (idPerson != null && idPerson.equals(idUpdate)) {
-                            if (people.get(i) instanceof NaturalPerson) {
-                                System.out.println("Enter your new name: ");
-                                String newName = sc.nextLine();
-
-                                System.out.println("Enter your new age: ");
-                                String newAgeInput = sc.nextLine();
-                                int newAge = Integer.parseInt(newAgeInput);
-
-                                System.out.println("Enter your new address: ");
-                                String newAddress = sc.nextLine();
-                                ((NaturalPerson) people.get(i)).update(newName,newAge,newAddress);
-                                updated = true;
-                            } else if (people.get(i) instanceof LegalPerson) {
-                                System.out.println("Enter your new legal name: ");
-                                String newLegalName = sc.nextLine();
-                                System.out.println("Enter your new address: ");
-                                String newAddress = sc.nextLine();
-                                ((LegalPerson) people.get(i)).update(newLegalName,newAddress);
-                                updated = true;
+                    Person personToUpdate = null;
+                    while (true) {
+                        try {
+                            System.out.println("Enter the id to search: ");
+                            String idString = sc.nextLine();
+                            int idSearch = Integer.parseInt(idString);
+                            for (Person person : people) {
+                                if (person.getId() != null && person.getId().equals(idSearch)) {
+                                    personToUpdate = person;
+                                    break;
+                                }
                             }
-                            break;
+                            if (personToUpdate != null) {
+                                break;
+                            } else {
+                                System.out.println("Id not found, try again.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid id. Please enter a number.");
                         }
                     }
-                    if (updated) {
-                        System.out.println("Update sucess.");
-                    }else {
-                        System.out.println("Id not found.");
+                    if (personToUpdate instanceof NaturalPerson) {
+                        String newName;
+                        int newAge;
+                        while (true) {
+                            System.out.println("Enter your new name: ");
+                            newName = sc.nextLine();
+                            try {
+                                ((NaturalPerson) personToUpdate).validateName(newName);
+                                break;
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        while (true){
+                            System.out.println("Enter your new age: ");
+                            String ageString = sc.nextLine();
+                            try {
+                                newAge = Integer.parseInt(ageString);
+                                ((NaturalPerson) personToUpdate).validateAge(newAge);
+                                break;
+                            }catch (NumberFormatException e) {
+                                System.out.println("Invalid age. Please enter a number.");
+                            }
+                            catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+
+                        System.out.println("Enter your new address: ");
+                        String newAddress = sc.nextLine();
+
+                        ((NaturalPerson)personToUpdate).update(newName,newAge,newAddress);
+                    } else if (personToUpdate instanceof LegalPerson) {
+                        String newLegalName;
+                        while (true) {
+                            System.out.println("Enter your new legal name: ");
+                            newLegalName = sc.nextLine();
+                            try {
+                                ((LegalPerson) personToUpdate).validateLegalName(newLegalName);
+                                break;
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        System.out.println("Enter your new address: ");
+                        String newAddress = sc.nextLine();
+
+                        ((LegalPerson) personToUpdate).update(newLegalName,newAddress);
                     }
                     break;
                 case 4:
@@ -170,7 +227,7 @@ public class Application {
             }
         }
         return false;
-
     }
+
 
 }
