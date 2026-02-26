@@ -1,12 +1,14 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class LegalPerson extends Person{
     private String legalName;
 
     public LegalPerson() {
     }
+
 
     public LegalPerson(Integer id, String address, LocalDateTime createdAt, String legalName) {
         super(id, address, createdAt);
@@ -20,7 +22,7 @@ public class LegalPerson extends Person{
         super.update(newAddress);
     }
 
-    public void validateLegalName(String legalName) {
+    public static void validateLegalName(String legalName) {
         if (legalName == null || legalName.trim().isEmpty()) {
             System.out.println("------------------");
             throw new IllegalArgumentException("Invalid legal name.");

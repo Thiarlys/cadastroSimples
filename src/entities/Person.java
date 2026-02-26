@@ -2,6 +2,7 @@ package entities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 
 public abstract class Person {
@@ -34,6 +35,8 @@ public abstract class Person {
         this.address = address;
         this.updateAt = LocalDateTime.now();
     }
+
+
 
 
 

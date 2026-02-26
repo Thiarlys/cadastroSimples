@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class NaturalPerson extends Person{
 
@@ -9,6 +10,7 @@ public class NaturalPerson extends Person{
 
     public NaturalPerson() {
     }
+
 
     public NaturalPerson(Integer id, String address, LocalDateTime createdAt, String name, Integer age) {
         super(id, address, createdAt);
@@ -26,19 +28,20 @@ public class NaturalPerson extends Person{
         super.update(newAddress);
     }
 
-    public void validateName(String name) {
+    public static void validateName(String name) {
         if ((name == null) || !name.matches("[a-zA-ZÀ-ÿ ]+")) {
             System.out.println("------------------");
             throw new IllegalArgumentException("Invalid name");
         }
     }
 
-    public void validateAge(int age) {
+    public static void validateAge(int age) {
         if (age <= 0 || age > 120) {
             System.out.println("------------------");
             throw new IllegalArgumentException("Invalid age");
         }
     }
+
 
 
     @Override
