@@ -1,7 +1,6 @@
-package entities;
+package model.entities;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class NaturalPerson extends Person{
 

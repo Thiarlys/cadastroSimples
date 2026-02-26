@@ -1,15 +1,15 @@
 package program;
 
-import entities.LegalPerson;
-import entities.NaturalPerson;
-import entities.Person;
+import model.entities.LegalPerson;
+import model.entities.NaturalPerson;
+import model.entities.Person;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
-import static entities.LegalPerson.validateLegalName;
-import static entities.NaturalPerson.validateAge;
-import static entities.NaturalPerson.validateName;
+import static model.entities.LegalPerson.validateLegalName;
+import static model.entities.NaturalPerson.validateAge;
+import static model.entities.NaturalPerson.validateName;
 
 public class Application {
     public static void main(String[] args) {

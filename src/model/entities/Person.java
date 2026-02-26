@@ -1,8 +1,7 @@
-package entities;
+package model.entities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 
 public abstract class Person {
